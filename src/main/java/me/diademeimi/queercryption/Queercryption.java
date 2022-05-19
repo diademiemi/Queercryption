@@ -19,9 +19,16 @@ public class Queercryption {
     public String main(String string) {
         try (StringReader reader = new StringReader(string)) {
             Integer rounds;
+            String body;
             JsonObject json = Json.createReader(reader).readObject();
             
             JsonObjectBuilder jsonBuilder = Json.createObjectBuilder();
+
+            try {
+                body = json.getString("body");
+            } catch (Exception e) {
+                body = "ERROR: No body parameter provided";
+            }
 
             try { 
                 rounds = json.getInt("rounds");
@@ -31,7 +38,7 @@ public class Queercryption {
 
             jsonBuilder.add(
                 "body", 
-                Queercrypt.queercrypt(json.getString("body"), rounds)
+                Queercrypt.queercrypt(body, rounds)
             );
             jsonBuilder.add("status", "ok");
 
