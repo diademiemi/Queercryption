@@ -25,7 +25,7 @@ public class Queercrypt {
         
             }
 
-            if (rand.nextDouble() < 0.33) {
+            if (rand.nextDouble() < 0.06) {
                 newWords.add(emoji[rand.nextInt(emoji.length)]);
             }
 
@@ -43,7 +43,7 @@ public class Queercrypt {
                             offset++;
                         }
                         if (!words[i + offset].equalsIgnoreCase("literally") && !Arrays.asList(emoji).contains(words[i - offset])) {
-                            if (rand.nextDouble() < 0.10) {
+                            if (rand.nextDouble() < 0.02) {
                                 newWords.add("LITERALLY");
                             }            
                         }
@@ -58,7 +58,7 @@ public class Queercrypt {
                     if (rand.nextDouble() < 0.50) {
                         StringBuilder sb = new StringBuilder();
                         sb.append("lmao");
-                        for (int o = 0; o < rand.nextInt(5); o++) {
+                        for (int o = 0; o < rand.nextInt(8); o++) {
                             sb.append("o");
                         }
                         newWords.add(sb.toString());
