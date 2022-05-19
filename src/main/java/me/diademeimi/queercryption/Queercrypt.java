@@ -21,6 +21,18 @@ public class Queercrypt {
         "😳"
     };
 
+    static String[] bottomKeys = new String[]{
+        "a", "a", "a",
+        "s", "s", "s",
+        "d", "d",
+        "f", "f",
+        "h", "h", "h",
+        "j", "j",
+        "k",
+        "l", "l", "l",
+        ";",
+    };
+
     static List<String> emojiList = Arrays.asList(emoji);
 
     public static String queercrypt(String input, Integer rounds) {
@@ -70,7 +82,32 @@ public class Queercrypt {
                 }
             }
 
-            newWords.add(words[i]);
+            if (rand.nextDouble() < 0.004) {
+                StringBuilder sb = new StringBuilder();
+                for (int b = 0; b < rand.nextInt(10) + 4; b++) {
+                    sb.append(bottomKeys[rand.nextInt(bottomKeys.length)]);
+                }
+                newWords.add(sb.toString());
+            }
+
+            if (rand.nextDouble() < 0.002) {
+                newWords.add("like");
+            }
+
+            if (rand.nextDouble() < 0.003) {
+                StringBuilder sb = new StringBuilder();
+                for (int b = 0; b < rand.nextInt(3) + 3; b++) {
+                    sb.append("?");
+                }
+                newWords.add(sb.toString());
+            }
+
+            if (rand.nextDouble() < 0.01) {
+                newWords.add(words[i].toUpperCase());
+            } else {
+                newWords.add(words[i]);
+            }
+
 
             if (i == words.length - 1) {
                 if (!words[words.length - 1].toLowerCase().startsWith("lmao")) {
