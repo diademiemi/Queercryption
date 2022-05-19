@@ -2,11 +2,26 @@ package me.diademeimi.queercryption;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 public class Queercrypt {
 
-    static String[] emoji = new String[]{"🥺", "👉👈", "😈", "😭", "🤨", "😳"};
+    static String[] emoji = new String[]{
+        "🥺",
+        "🥺",
+        "👉👈",
+        "😈",
+        "😭",
+        "😭",
+        "🤨",
+        "🤨",
+        "🤨",
+        "😳",
+        "😳"
+    };
+
+    static List<String> emojiList = Arrays.asList(emoji);
 
     public static String queercrypt(String input, Integer rounds) {
         for (int i = 0; i < rounds; i++) {
@@ -26,7 +41,11 @@ public class Queercrypt {
             }
 
             if (rand.nextDouble() < 0.06) {
-                newWords.add(emoji[rand.nextInt(emoji.length)]);
+
+                if (i - 3 > 0 && !emojiList.containsAll(new ArrayList<>(Arrays.asList(words[i - 1], words[i - 2])))) {
+                    newWords.add(emoji[rand.nextInt(emoji.length)]);
+                }
+
             }
 
             if (i > 0 && !words[i].equals(" ") && !words[i].equals("")) {
@@ -35,14 +54,14 @@ public class Queercrypt {
                 while (words[i - offset].equals("") || words[i - offset].equals(" ")) {
                     offset++;
                 }
-                if (!words[i - offset].equalsIgnoreCase("literally") && !Arrays.asList(emoji).contains(words[i - offset])) {
+                if (!words[i - offset].equalsIgnoreCase("literally") && emojiList.contains(words[i - offset])) {
                     if (i + 1 < words.length) {
                         offset = 0;
 
                         while (words[i + offset].equals("") || words[i + offset].equals(" ")) {
                             offset++;
                         }
-                        if (!words[i + offset].equalsIgnoreCase("literally") && !Arrays.asList(emoji).contains(words[i - offset])) {
+                        if (!words[i + offset].equalsIgnoreCase("literally") && emojiList.contains(words[i - offset])) {
                             if (rand.nextDouble() < 0.02) {
                                 newWords.add("LITERALLY");
                             }            
