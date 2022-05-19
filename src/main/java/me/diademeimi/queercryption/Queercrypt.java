@@ -40,7 +40,7 @@ public class Queercrypt {
         
             }
 
-            if (rand.nextDouble() < 0.06) {
+            if (rand.nextDouble() < 0.04) {
 
                 if (i - 3 > 0 && !emojiList.containsAll(new ArrayList<>(Arrays.asList(words[i - 1], words[i - 2])))) {
                     newWords.add(emoji[rand.nextInt(emoji.length)]);
@@ -62,7 +62,7 @@ public class Queercrypt {
                             offset++;
                         }
                         if (!words[i + offset].equalsIgnoreCase("literally") && emojiList.contains(words[i - offset])) {
-                            if (rand.nextDouble() < 0.02) {
+                            if (rand.nextDouble() < 0.15) {
                                 newWords.add("LITERALLY");
                             }            
                         }
