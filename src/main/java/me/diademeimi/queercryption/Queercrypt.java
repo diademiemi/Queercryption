@@ -26,7 +26,7 @@ public class Queercrypt {
         "s", "s", "s",
         "d", "d",
         "f", "f",
-        "h", "h", "h",
+        "h",
         "j", "j",
         "k",
         "l", "l", "l",
