@@ -111,16 +111,18 @@ public class Queercrypt {
             }
 
             if (words[i].endsWith("?")) {
-                if (rand.nextDouble() < 0.20) {
+                if (!words[i].toLowerCase().contains("perchance") && rand.nextDouble() < 0.04) {
+                    newWords.add(words[i] + " Perchance.");
+                } else {
                     newWords.add(words[i]);
-                    newWords.add("Perchance.");
                 }
             } else if (rand.nextDouble() < 0.01) {
                 newWords.add(words[i].toUpperCase());
-                continue;
             } else {
                 newWords.add(words[i]);
-                continue;
+            }
+            for (String word : words) {
+                System.out.println(word);
             }
 
 
