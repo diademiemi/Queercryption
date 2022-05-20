@@ -82,6 +82,11 @@ public class Queercrypt {
                 }
             }
 
+            if (rand.nextDouble() < 0.002) {
+                newWords.add("like");
+            }
+
+
             if (rand.nextDouble() < 0.004) {
                 StringBuilder sb = new StringBuilder();
                 for (int b = 0; b < rand.nextInt(10) + 4; b++) {
@@ -90,22 +95,32 @@ public class Queercrypt {
                 newWords.add(sb.toString());
             }
 
-            if (rand.nextDouble() < 0.002) {
-                newWords.add("like");
-            }
 
-            if (rand.nextDouble() < 0.003) {
+            if (rand.nextDouble() < 0.004) {
                 StringBuilder sb = new StringBuilder();
+                char character;
+                if (rand.nextDouble() < 0.5) {
+                    character = '!'; 
+                } else {
+                    character = '?';
+                }
                 for (int b = 0; b < rand.nextInt(3) + 3; b++) {
-                    sb.append("?");
+                    sb.append(character);
                 }
                 newWords.add(sb.toString());
             }
 
-            if (rand.nextDouble() < 0.01) {
+            if (words[i].endsWith("?")) {
+                if (rand.nextDouble() < 0.20) {
+                    newWords.add(words[i]);
+                    newWords.add("Perchance.");
+                }
+            } else if (rand.nextDouble() < 0.01) {
                 newWords.add(words[i].toUpperCase());
+                continue;
             } else {
                 newWords.add(words[i]);
+                continue;
             }
 
 
