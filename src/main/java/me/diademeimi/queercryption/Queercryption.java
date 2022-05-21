@@ -32,6 +32,11 @@ public class Queercryption {
 
             try { 
                 rounds = json.getInt("rounds");
+                if (rounds > 50) {
+                    rounds = 50;
+                } else if (rounds < 1) {
+                    rounds = 1;
+                }
             } catch (NullPointerException e) {
                 rounds = 10;
             }
