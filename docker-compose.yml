@@ -1,0 +1,12 @@
+version: '2'
+
+services:
+  queercryption:
+    container_name: queercryption
+    image: diademiemi/queercryption
+    restart: always
+    build:
+      context: .
+      dockerfile: src/main/docker/Dockerfile.jvm
+    ports:
+     - "8080:8080"
