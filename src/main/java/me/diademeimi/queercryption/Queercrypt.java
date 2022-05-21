@@ -13,16 +13,17 @@ public class Queercrypt {
 
     static String[] emotes = new String[]{
         "🥺",
-        "🥺",
         "👉👈",
         "😈",
         "😭",
-        "😭",
-        "🤨",
-        "🤨",
         "🤨",
         "😳",
-        "😳"
+        ";)",
+        ":)",
+        ":P",
+        ":^)",
+        ":D",
+        ":o"
     };
 
     static String[] bottomKeys = new String[]{
@@ -43,7 +44,15 @@ public class Queercrypt {
         for (int i = 0; i < rounds; i++) {
             input = encrypt(input);
         }
-        return input;
+
+        if (rand.nextDouble() < 0.1) {
+            return input.toUpperCase();
+        } else if (rand.nextDouble() < 0.1) {
+            return input.toLowerCase();
+        } else {
+            return input;
+        }
+
     }
 
     static String encrypt(String input) {
@@ -51,8 +60,13 @@ public class Queercrypt {
         String[] words = input.split(" ");
         ArrayList<String> newWords = new ArrayList<String>();
 
-
         for (int i = 0; i < words.length; i++) {
+
+            if (i == 0 && !words[i].equals("omg")) {
+                if (rand.nextDouble() < 0.02) {
+                    newWords.add("omg");
+                }        
+            }
 
             if (LangProcessor.canInjectAdverb(words[i])) {
                 if (rand.nextDouble() < 0.10) {
