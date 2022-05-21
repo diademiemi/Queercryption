@@ -4,12 +4,12 @@ import edu.stanford.nlp.simple.Sentence;
 
 public class LangProcessor {
 
-    public static Boolean isVerb(String sentence) {
+    public static Boolean canInjectAdverb(String sentence) {
         Sentence sent = new Sentence(sentence);
 
         try {
-
-            if (sent.posTag(0).startsWith("VB")) {
+            String posTag = sent.posTag(0);
+            if (posTag.startsWith("VB") || posTag.equals("RB")) {
                 return true;
             }
 
