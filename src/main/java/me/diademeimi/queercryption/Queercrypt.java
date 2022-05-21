@@ -55,7 +55,7 @@ public class Queercrypt {
         for (int i = 0; i < words.length; i++) {
 
             if (LangProcessor.canInjectAdverb(words[i])) {
-                if (rand.nextDouble() > 0.06) {
+                if (rand.nextDouble() < 0.10) {
                     if (canInject(words, i, new ArrayList<>(Arrays.asList("literally", "like")))) {
                         if (rand.nextDouble() > 0.6) {
                             newWords.add("like");
