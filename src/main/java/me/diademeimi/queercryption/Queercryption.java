@@ -16,7 +16,7 @@ public class Queercryption {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public String main(String string) {
+    public String queercryption(String string) {
         try (StringReader reader = new StringReader(string)) {
             Integer rounds;
             String body;
