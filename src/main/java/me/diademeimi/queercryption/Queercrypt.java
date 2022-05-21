@@ -11,7 +11,7 @@ public class Queercrypt {
 
     static Random rand = new Random();
 
-    static String[] emoji = new String[]{
+    static String[] emotes = new String[]{
         "🥺",
         "🥺",
         "👉👈",
@@ -37,7 +37,7 @@ public class Queercrypt {
         ";",
     };
 
-    static List<String> emojiList = Arrays.asList(emoji);
+    static List<String> emotesList = Arrays.asList(emotes);
 
     public static String queercrypt(String input, Integer rounds) {
         for (int i = 0; i < rounds; i++) {
@@ -68,8 +68,8 @@ public class Queercrypt {
 
             if (rand.nextDouble() < 0.04) {
 
-                if (i - 3 > 0 && !emojiList.containsAll(new ArrayList<>(Arrays.asList(words[i - 1], words[i - 2])))) {
-                    newWords.add(emoji[rand.nextInt(emoji.length)]);
+                if (i - 3 > 0 && !emotesList.containsAll(new ArrayList<>(Arrays.asList(words[i - 1], words[i - 2])))) {
+                    newWords.add(emotes[rand.nextInt(emotes.length)]);
                 }
             }
 
@@ -138,30 +138,33 @@ public class Queercrypt {
         if (i > 0 && !words[i].equals(" ") && !words[i].equals("")) {
 
             int offset = 1;
+
             while (words[i - offset].equals("") || words[i - offset].equals(" ") 
-                || emojiList.contains(words[i - offset]) || words[i - offset].matches("([\\!\\?])\\1*")) {
+                || emotesList.contains(words[i - offset]) || words[i - offset].matches("([\\!\\?])\\1*")) {
+
                 offset++;
                 if (i - offset == 0) {
                     break;
                 }
             }
 
-            if (!toCheck.contains(words[i - offset])) {
+            if (!toCheck.contains(words[i - offset].toLowerCase())) {
 
                 if (i + 1 < words.length) {
 
                     offset = 0;
+
                     while (words[i + offset].equals("") || words[i + offset].equals(" ") 
-                        || emojiList.contains(words[i + offset]) || words[i + offset].matches("([\\!\\?])\\1*")) {
+                        || emotesList.contains(words[i + offset]) || words[i + offset].matches("([\\!\\?])\\1*")) {
+
                         offset++;
                         if (i + 1 == words.length) {
                             break;
-                        }        
+                        }
                     }
-
-                    if (!toCheck.contains(words[i + offset])) {
-
+                    if (!toCheck.contains(words[i + offset].toLowerCase())) {
                         return true;
+
                     }
                 }
             }
