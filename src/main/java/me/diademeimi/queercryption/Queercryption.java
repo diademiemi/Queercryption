@@ -27,14 +27,18 @@ public class Queercryption {
             try {
                 body = json.getString("body");
             } catch (Exception e) {
-                body = "ERROR: No body parameter provided";
+                jsonBuilder.add("body", Queercrypt.queercrypt("ERROR: No body parameter provided. body is required. rounds is an optional parameter", 1));
+                jsonBuilder.add("status", "error");
+                return jsonBuilder.build().toString();
             }
 
             try { 
                 rounds = json.getInt("rounds");
                 if (rounds > 50) {
+                    jsonBuilder.add("notice", "Too many rounds. Max is 50");
                     rounds = 50;
                 } else if (rounds < 1) {
+                    jsonBuilder.add("notice", "Too few rounds. Min is 1");
                     rounds = 1;
                 }
             } catch (NullPointerException e) {
