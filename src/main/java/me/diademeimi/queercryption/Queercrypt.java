@@ -5,9 +5,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+import me.diademeimi.queercryption.lang.LangProcessor;
+
 public class Queercrypt {
 
-    public static Random rand = new Random();
+    static Random rand = new Random();
 
     static String[] emoji = new String[]{
         "🥺",
@@ -24,13 +26,13 @@ public class Queercrypt {
     };
 
     static String[] bottomKeys = new String[]{
-        "a", "a", "a",
+        "a", "a",
         "s", "s", "s",
         "d", "d",
         "f", "f",
         "h",
         "j", "j",
-        "k",
+        "k", "k",
         "l", "l", "l",
         ";",
     };
@@ -44,12 +46,25 @@ public class Queercrypt {
         return input;
     }
 
-    public static String encrypt(String input) {
+    static String encrypt(String input) {
 
         String[] words = input.split(" ");
         ArrayList<String> newWords = new ArrayList<String>();
 
+
         for (int i = 0; i < words.length; i++) {
+
+            if (LangProcessor.isVerb(words[i])) {
+                if (rand.nextDouble() > 0.06) {
+                    if (canInject(words, i, new ArrayList<>(Arrays.asList("literally", "like")))) {
+                        if (rand.nextDouble() > 0.6) {
+                            newWords.add("like");
+                        } else {
+                            newWords.add("literally");
+                        }
+                    }
+                }
+            }
 
             if (rand.nextDouble() < 0.04) {
 
@@ -58,9 +73,6 @@ public class Queercrypt {
                 }
             }
 
-            if (canInject(words, i, "LITERALLY", 0.005)) {
-                newWords.add("LITERALLY");
-            };
 
             if (rand.nextDouble() < 0.002) {
                 newWords.add("like");
@@ -68,7 +80,7 @@ public class Queercrypt {
 
             if (rand.nextDouble() < 0.004) {
                 StringBuilder sb = new StringBuilder();
-                for (int b = 0; b < rand.nextInt(10) + 4; b++) {
+                for (int b = 0; b < rand.nextInt(8) + 7; b++) {
                     sb.append(bottomKeys[rand.nextInt(bottomKeys.length)]);
                 }
                 newWords.add(sb.toString());
@@ -94,9 +106,12 @@ public class Queercrypt {
                 } else {
                     newWords.add(words[i]);
                 }
-            } else if (rand.nextDouble() < 0.01) {
+
+            } else if (rand.nextDouble() < 0.004) {
+                // Add word capitalised
                 newWords.add(words[i].toUpperCase());
             } else {
+                // Add word as normal 
                 newWords.add(words[i]);
             }
 
@@ -119,34 +134,34 @@ public class Queercrypt {
 
         }
 
-    public static Boolean canInject(String[] words, Integer i, String toInject, Double chance) {
+    public static Boolean canInject(String[] words, Integer i, ArrayList<String> toCheck) {
         if (i > 0 && !words[i].equals(" ") && !words[i].equals("")) {
 
             int offset = 1;
-            while (words[i - offset].equals("") || words[i - offset].equals(" ") || emojiList.contains(words[i - offset])) {
+            while (words[i - offset].equals("") || words[i - offset].equals(" ") 
+                || emojiList.contains(words[i - offset]) || words[i - offset].matches("([\\!\\?])\\1*")) {
                 offset++;
                 if (i - offset == 0) {
                     break;
                 }
             }
 
-            if (!words[i - offset].equalsIgnoreCase(toInject)) {
+            if (!toCheck.contains(words[i - offset])) {
 
                 if (i + 1 < words.length) {
 
                     offset = 0;
-                    while (words[i + offset].equals("") || words[i + offset].equals(" ") || emojiList.contains(words[i - offset])) {
+                    while (words[i + offset].equals("") || words[i + offset].equals(" ") 
+                        || emojiList.contains(words[i + offset]) || words[i + offset].matches("([\\!\\?])\\1*")) {
                         offset++;
                         if (i + 1 == words.length) {
                             break;
                         }        
                     }
 
-                    if (!words[i + offset].equalsIgnoreCase(toInject)) {
+                    if (!toCheck.contains(words[i + offset])) {
 
-                        if (rand.nextDouble() < chance) {
-                            return true;
-                        }
+                        return true;
                     }
                 }
             }
