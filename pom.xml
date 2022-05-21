@@ -29,6 +29,18 @@
   </dependencyManagement>
   <dependencies>
     <dependency>
+      <groupId>edu.stanford.nlp</groupId>
+      <artifactId>stanford-corenlp-models</artifactId>
+      <version>2.4.0</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/src/main/resources/stanford-corenlp-4.4.0-models.jar</systemPath>
+    </dependency>
+    <dependency>
+      <groupId>edu.stanford.nlp</groupId>
+      <artifactId>stanford-corenlp</artifactId>
+      <version>4.4.0</version>
+    </dependency>
+    <dependency>
       <groupId>javax.json</groupId>
       <artifactId>javax.json-api</artifactId>
       <version>1.1.4</version>
